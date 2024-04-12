@@ -1,25 +1,43 @@
-#include "binary_trees.h"
-
+#include "main.h"
+#include <stdlib.h>
 /**
- * binary_tree_node - Creates a binary tree node.
- * @parent: A pointer to the parent of the node to create.
- * @value: The value to put in the new node.
+ * binary_to_uint - Convert a string representing a binary number to an
+ * unsigned int decimal value
+ * @b: The string containing the binary
  *
- * Return: If an error occurs - NULL.
- *         Otherwise - a pointer to the new node.
+ * Return: 0 if string contains something other than 1 or 0, or
+ * if the string is NULL, return the decimal value on success
  */
-binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
+unsigned int binary_to_uint(const char *b)
 {
-	binary_tree_t *new;
+        unsigned int i, len;
+        unsigned int decval;
 
-	new = malloc(sizeof(binary_tree_t));
-	if (new == NULL)
-		return (NULL);
 
-	new->n = value;
-	new->parent = parent;
-	new->left = NULL;
-	new->right = NULL;
+        i = len = decval = 0;
 
-	return (new);
+
+        if (b == NULL)
+                return (0);
+
+
+        while (b[len] != '\0')
+        {
+
+
+                if (b[len] == '0' || b[len] == '1')
+                        len++;
+
+
+                else
+                        return (0);
+        }
+        while (i < len)
+        {
+                decval = decval << 1;
+                if (b[i] == '1')
+                        decval += 1;
+                i++;
+        }
+        return (decval);
 }
